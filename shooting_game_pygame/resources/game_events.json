@@ -1,0 +1,25 @@
+{
+    "events": [
+        {
+            "time": 0,
+            "type": "spawn_wave",
+            "enemy_count": 5,
+            "pattern_id": 1,
+            "interval": 1.0
+        },
+        {
+            "time": 10,
+            "type": "spawn_wave",
+            "enemy_count": 8,
+            "pattern_id": 2,
+            "interval": 0.8
+        },
+        {
+            "time": 20,
+            "type": "spawn_wave",
+            "enemy_count": 10,
+            "pattern_id": 3,
+            "interval": 0.6
+        }
+    ]
+}

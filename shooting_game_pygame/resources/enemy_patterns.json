@@ -1,0 +1,23 @@
+{
+    "patterns": [
+        {
+            "id": 1,
+            "movement": "sine",
+            "speed": 2,
+            "amplitude": 100,
+            "frequency": 0.02
+        },
+        {
+            "id": 2,
+            "movement": "linear",
+            "speed": 3,
+            "angle": 45
+        },
+        {
+            "id": 3,
+            "movement": "circular",
+            "speed": 2,
+            "radius": 50
+        }
+    ]
+}
