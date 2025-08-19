@@ -3,41 +3,45 @@ import random
 from .constants import *
 
 class Explosion(pygame.sprite.Sprite):
-    def __init__(self, x, y, size=30):
+    def __init__(self, x, y, resource_loader):
         super().__init__()
-        self.size = size
-        self.image = pygame.Surface([size, size])
-        self.image.fill((255, 165, 0))  # Orange
-        self.image.set_colorkey((0, 0, 0))
-        self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
-        self.frame = 0
-        self.max_frame = 8
-        self.alpha = 255
+        self.resource_loader = resource_loader
+        self.animation_frames = [self.resource_loader.sprites.get(f'explosion_{i}') for i in range(7)]
+        
+        self.frame_index = 0
+        self.image = self.animation_frames[self.frame_index]
+        if self.image:
+            self.rect = self.image.get_rect()
+            self.rect.center = (x, y)
+        else:
+            # Handle case where sprite is not found
+            self.kill()
+
+        self.animation_speed = 3  # Update frame every 3 game ticks, matching VB6
+        self.animation_timer = 0
 
     def update(self):
-        self.frame += 1
-        if self.frame >= self.max_frame:
-            self.kill()
-        else:
-            # Create explosion animation effect
-            self.alpha = 255 * (1 - self.frame / self.max_frame)
-            self.image.set_alpha(self.alpha)
-            new_size = int(self.size * (1 + self.frame / self.max_frame))
-            old_center = self.rect.center
-            self.image = pygame.Surface([new_size, new_size])
-            self.image.fill((255, 165, 0))
-            self.image.set_colorkey((0, 0, 0))
-            self.image.set_alpha(self.alpha)
-            self.rect = self.image.get_rect()
-            self.rect.center = old_center
+        if not self.image:
+            return
+
+        self.animation_timer += 1
+        if self.animation_timer >= self.animation_speed:
+            self.animation_timer = 0
+            self.frame_index += 1
+            if self.frame_index >= len(self.animation_frames):
+                self.kill()
+            else:
+                self.image = self.animation_frames[self.frame_index]
+                if not self.image:
+                    self.kill()
 
 class ParticleSystem:
-    def __init__(self):
+    def __init__(self, resource_loader):
         self.particles = pygame.sprite.Group()
+        self.resource_loader = resource_loader
     
-    def create_explosion(self, x, y, size=30):
-        explosion = Explosion(x, y, size)
+    def create_explosion(self, x, y):
+        explosion = Explosion(x, y, self.resource_loader)
         self.particles.add(explosion)
     
     def update(self):

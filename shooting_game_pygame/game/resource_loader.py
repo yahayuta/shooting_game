@@ -49,11 +49,11 @@ class ResourceLoader:
                     # Explosion sprites: y=224-256, x=128-256 (4 frames)
                     {
                         'type': 'explosion',
-                        'x': 128,
-                        'y': 224,
+                        'x': 0,
+                        'y': 128,
                         'width': 32,
                         'height': 32,
-                        'count': 4,  # 4 explosion frames in VB6
+                        'count': 7,  # 7 explosion frames in VB6
                         'use_mask': False
                     }
                 ]

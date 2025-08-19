@@ -47,6 +47,7 @@ While both versions share the same core concept, the Pygame version is a signifi
 
 *   **Enemy Movement:** The VB6 version uses rigid, step-by-step paths for each enemy type, defined in binary `.DAT` files. The Pygame version replaces this with a dynamic, behavior-based system using JSON files, defining patterns like "sine wave" or "linear" movement.
 *   **Game Events:** The VB6 version uses a timeline of discrete spawn events. The Pygame version implements a more flexible, time-based event system (e.g., "spawn_wave") defined in a JSON file.
+*   **Explosion System:** The original VB6 explosion, a 7-frame sprite-based animation, has been accurately migrated to the Pygame version, replacing a previous procedural particle effect.
 
 The `DAT_EXPORT.bas` module in the VB6 project was likely a utility used to analyze the original game data, which then inspired the new, modernized system in the Pygame version.
 

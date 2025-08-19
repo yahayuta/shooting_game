@@ -31,7 +31,7 @@ class GameState:
         self.all_sprites.add(self.player)
         
         # Particle system for explosions and effects
-        self.particle_system = ParticleSystem()
+        self.particle_system = ParticleSystem(self.resource_loader)
         
         # Scoring system
         self.score_manager = ScoreManager()
@@ -84,8 +84,7 @@ class GameState:
                 self.player.hit()  # Handle player getting hit
                 self.particle_system.create_explosion(
                     self.player.rect.centerx,
-                    self.player.rect.centery,
-                    50  # Large explosion
+                    self.player.rect.centery
                 )
                 self.resource_loader.sound_manager.play_sound('hit')
         
@@ -148,6 +147,5 @@ class GameState:
         # Create a large explosion effect
         self.particle_system.create_explosion(
             self.player.rect.centerx,
-            self.player.rect.centery,
-            size=50
+            self.player.rect.centery
         )
